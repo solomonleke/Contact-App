@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useContext } from 'react/cjs/react.development'
+import { UserContext } from '../Context/UserContext'
 
-export default function Modal() {
+export default function EditModal() {
+
+    const {ContactId, setContactId} = useContext(UserContext)
 
     const [Contacts, setContacts] = useState({
         name: "",
@@ -17,62 +21,51 @@ export default function Modal() {
 
     }
 
-    const AddContact = () =>{
+    const UpdateContact = () =>{
 
-        if (Contacts.email==='' || Contacts.name===''|| Contacts.location===''|| Contacts.designation===''||Contacts.phone===''||Contacts.image===''){ 
-
-            alert('Please Fill up all the Required Fields')
-        }else{
-
-            
-
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: JSON.stringify(Contacts),
-                redirect: 'follow'
-                };
-        
-                fetch("http://localhost:8000/api/contactsApp", requestOptions)
-                .then(response => response.json())
-                .then(result =>{
-                        if(result){
-                            alert('Contact Added Successfully.');
-                            setContacts({
-                                name: "",
-                                email: "",
-                                designation: "",
-                                location: "",
-                                image: "",
-                                phone: ""
-                            })
-                        }
-                        
-                    }
-                 )
-                .catch(error =>{
-                  alert('Something went wrong! Please check your internet connection....');
-                     console.log('error', error)
-                
-                });
-
-        }
-
-       
-    
     }
 
+    const fetchSingle = () =>{
+     
+            fetch(`http://localhost:8000/api/single_contacts/${ContactId}`)
+            .then(response => response.json())
+            .then(result =>{
+                if(ContactId !== ''){
+
+                    
+
+                        setContacts({ ...Contacts,
+                            name: result.name,
+                            email: result.email,
+                            designation: result.designation,
+                            location: result.location,
+                            image: result.image,
+                            phone: result.phone,
+                        })
+                  
+               
+            }
+                }
+            )
+             
+          
+      
+       
+    }
+
+    useEffect(() => {
+       fetchSingle()
+       UpdateContact()
+    }, [])
 
     return (
         <div>
       
-        <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade" id="MexampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">Add Contact</h5>
+                <h5 className="modal-title" id="exampleModalLabel">Edit Contact Info {ContactId}</h5>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
               </div>
               <div className="modal-body">
@@ -125,7 +118,7 @@ export default function Modal() {
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Discard</button>
-                <button type="button" onClick={AddContact} className="btn btn-primary">Add</button>
+                <button type="button" onClick={UpdateContact} className="btn btn-primary">Add</button>
               </div>
             </div>
           </div>
@@ -133,3 +126,4 @@ export default function Modal() {
       </div>
     )
 }
+

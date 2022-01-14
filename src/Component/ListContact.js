@@ -1,4 +1,5 @@
 import React from 'react'
+import EditModal from './EditModal'
 import Modal from './Modal'
 
 export default function ListContact({img,name,designation,email, location, phone, showModal}) {
@@ -10,7 +11,7 @@ export default function ListContact({img,name,designation,email, location, phone
             <div className="col-lg-4"> 
                 <div className="row">
                     <div className="col-lg-4">
-                    <input className="checkbox" type="checkbox" />  <img className="contact-img" src={img} alt="" />
+                    <input className="checkbox2" type="checkbox" />  <img className="contact-img" src={img} alt="" />
                     </div>
                     <div className="col-lg-8">
                         <p className="contact-name">{name}</p>
@@ -24,13 +25,17 @@ export default function ListContact({img,name,designation,email, location, phone
             <div className="col-lg-2">
                 <div className="row">
                    
-                    <div className="col-lg-12 fun-icon"><p><i onClick={showModal} data-bs-toggle="modal" data-bs-target="#exampleModal"  className="fas fa-pencil-alt pen trash" /><i className="fas fa-user-minus  trash" /></p></div>
+                    <div className="col-lg-12 fun-icon"><p><i onClick={showModal} data-bs-toggle="modal" data-bs-target="#MexampleModal"  className="fas fa-pencil-alt pen trash" /><i className="fas fa-user-minus  trash" /></p></div>
                 </div>
             </div>
         </div>
         <div id='myModal'>
             <Modal/>
         </div>
+        <div id='EditModal'>
+            <EditModal/>
+        </div>
+        
     </div>
     )
 }

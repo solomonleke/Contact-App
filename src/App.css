@@ -1,6 +1,7 @@
 .App{
     background-color:#fafafa;
     font-family: Quicksand, sans-serif;
+    height: 100vh;
 }
 .nav-row{
     margin-top: 23px;
@@ -87,6 +88,17 @@
     background: #0029dd !important;
     border-radius: 20px;
     border: 0;
+}
+
+.checkbox2{
+    margin-right: 20px !important;
+    margin-left: 10px;
+    background: #0029dd !important;
+    border-radius: 20px;
+    margin-top: 20px !important;
+    border: 0;
+    position: relative;
+    top: 10px;
 }
 .title{
     color: #3b3f5c;

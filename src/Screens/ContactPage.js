@@ -1,11 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useContext } from 'react/cjs/react.development'
 import Button from '../Component/Button'
 import ListContact from '../Component/ListContact'
+import { UserContext } from '../Context/UserContext'
 
 export default function ContactPage() {
+  const {ContactId, setContactId} = useContext(UserContext)
   const showModal = () =>{
     document.getElementById("myModal").style.display = "block"
   }
+
+  const EditModal = (id) =>{
+    document.getElementById("EditModal").style.display = "block"
+    setContactId(id)
+  }
+
+
+  const [Data, setData] = useState([])
+
+  const fetch_contact = () =>{
+
+    fetch("http://localhost:8000/api/fetch_contacts")
+    .then(response => response.json())
+    .then(result =>{
+          
+            setData(result);
+        }
+     )
+    .catch(error =>{
+      alert('Something went wrong! Please check your internet connection....');
+         console.log('error', error)
+    
+    });
+  }
+
+  useEffect(() => {
+
+    fetch_contact()
+   
+  }, [])
     return (
         <div>
           <div className="container">
@@ -22,11 +55,8 @@ export default function ContactPage() {
 
                   <div className="col-lg-4"></div>
 
-                  <Button
-                    btn_style= "contact-btn btn-1 "
-                    btn_icon= "fas fa-user-plus icon1"
-                    link = "/wde"
-                    />
+                  <div className="col-lg-1"> <button onClick={showModal}  data-bs-toggle="modal" data-bs-target="#exampleModal" className="contact-btn btn-1 "><i  className="fas fa-user-plus icon1" /></button></div>
+                 
                     <Button
                     btn_style= "contact-btn btn-2"
                     btn_icon= "fas fa-list icon2"
@@ -52,30 +82,28 @@ export default function ContactPage() {
               
             </div>
 
-              <ListContact
-                img = "https://designreset.com/cork/ltr/demo11/assets/img/profile-5.jpeg"
-                name = "Adeleke Solomon"
-                designation= "Project Lead"
-                email = "lordsoliz@gmail.com"
-                location= "Lagos. Nigeria"
-                phone = "+23448165413816"
-                showModal={showModal}
+            {
+              Data.map((item, i) =>(
+
+                <ListContact
+                img = {item.image}
+                name = {item.name}
+                designation= {item.designation}
+                email = {item.email}
+                location= {item.location}
+                phone = {item.phone}
+                showModal={() =>EditModal(item.id)}
               />
+              ))
+            }
+           
 
            
-              <ListContact
-                img = "https://designreset.com/cork/ltr/demo11/assets/img/profile-8.jpeg"
-                name = "Collins Aboki"
-                designation= "Project Lead"
-                email = "lordsoliz@gmail.com"
-                location= "Lagos. Nigeria"
-                phone = "+23448165413816"
-                showModal={showModal}
-              />
+           
 
            
              
-
+            <br/><br/>
               
           </div>
    

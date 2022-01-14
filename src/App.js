@@ -4,11 +4,19 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ContactPage from './Screens/ContactPage';
 import GridContact from './Component/GridContact';
 import GridPage from './Screens/GridPage';
+import { UserContext } from './Context/UserContext';
+
+import { useState } from 'react';
+
 
 function App() {
 
+  const [ContactId, setContactId] = useState("")
+
   return (
     <div className="App">
+    
+    <UserContext.Provider value = {{ContactId, setContactId}}>
      <BrowserRouter>
     
 
@@ -19,6 +27,7 @@ function App() {
           <Route path="/gridCard" element={<GridPage/>}/>
         </Routes>
      </BrowserRouter>
+     </UserContext.Provider>
     </div>
   );
 }
