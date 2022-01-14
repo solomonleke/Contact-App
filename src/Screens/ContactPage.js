@@ -6,6 +6,14 @@ import { UserContext } from '../Context/UserContext'
 
 export default function ContactPage() {
   const {ContactId, setContactId} = useContext(UserContext)
+  const {Watch, setWatch} = useContext(UserContext)
+
+  const [Search, setSearch] = useState("")
+
+  const handleSearch = (e) =>{
+
+    setSearch(e.target.value)
+  }
   const showModal = () =>{
     document.getElementById("myModal").style.display = "block"
   }
@@ -33,12 +41,30 @@ export default function ContactPage() {
     
     });
   }
+  const delete_contact = (id) =>{
+
+    fetch(`http://localhost:8000/api/delete/${id}`)
+    .then(response => response.json())
+    .then(result =>{
+          
+         
+      setWatch(!Watch)
+
+           
+        }
+     )
+    .catch(error =>{
+      alert('Something went wrong! Please check your internet connection....');
+         console.log('error', error)
+    
+    });
+  }
 
   useEffect(() => {
 
     fetch_contact()
    
-  }, [])
+  }, [Watch])
     return (
         <div>
           <div className="container">
@@ -48,7 +74,7 @@ export default function ContactPage() {
 
                 <div className="row nav-row">
                   <div className="col-lg-5 ">
-                    <input type="text" className="search" placeholder='Search Contacts'/>
+                    <input type="text"  className="search" value={Search} onChange={handleSearch} placeholder='Search Contacts'/>
                     <i className="fas fa-search search-icon" />
 
                   </div>
@@ -83,18 +109,40 @@ export default function ContactPage() {
             </div>
 
             {
-              Data.map((item, i) =>(
+              Search !== "" ? (
+                Data.filter(Data => (Data.name) == Search || (Data.designation) == Search || (Data.location) == Search  )
+              
+                .map((item, i) =>(
+  
+                  <ListContact
+                  img = {item.image}
+                  name = {item.name}
+                  designation= {item.designation}
+                  email = {item.email}
+                  location= {item.location}
+                  phone = {item.phone}
+                  showModal={() =>EditModal(item.id)}
+                  delete_contact={() =>delete_contact(item.id)}
+                />
+                ))
+              ): (
 
-                <ListContact
-                img = {item.image}
-                name = {item.name}
-                designation= {item.designation}
-                email = {item.email}
-                location= {item.location}
-                phone = {item.phone}
-                showModal={() =>EditModal(item.id)}
-              />
-              ))
+                Data.map((item, i) =>(
+  
+                  <ListContact
+                  img = {item.image}
+                  name = {item.name}
+                  designation= {item.designation}
+                  email = {item.email}
+                  location= {item.location}
+                  phone = {item.phone}
+                  showModal={() =>EditModal(item.id)}
+                  delete_contact={() =>delete_contact(item.id)}
+                />
+                ))
+              )
+
+            
             }
            
 

@@ -8,6 +8,8 @@ import { UserContext } from '../Context/UserContext'
 export default function GridPage() {
 
     const {ContactId, setContactId} = useContext(UserContext)
+    const {Watch, setWatch} = useContext(UserContext)
+
     const showModal = () =>{
         document.getElementById("myModal").style.display = "block"
       }
@@ -40,7 +42,7 @@ export default function GridPage() {
 
     fetch_contact()
    
-  }, [])
+  }, [ContactId,Watch])
 
     return (
         <div>
@@ -83,7 +85,7 @@ export default function GridPage() {
                     email = {item.email}
                     location= {item.location}
                     phone = {item.phone}
-                    Modal={() =>EditModal(item.id)}
+                    showModal={()=>EditModal(item.id)}
                 />
                 ))
             }

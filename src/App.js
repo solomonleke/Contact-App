@@ -12,11 +12,12 @@ import { useState } from 'react';
 function App() {
 
   const [ContactId, setContactId] = useState("")
+  const [Watch, setWatch] = useState(false)
 
   return (
     <div className="App">
-    
-    <UserContext.Provider value = {{ContactId, setContactId}}>
+
+    <UserContext.Provider value = {{ContactId, setContactId, Watch, setWatch}}>
      <BrowserRouter>
     
 

@@ -2,7 +2,7 @@ import React from 'react'
 import EditModal from './EditModal'
 import Modal from './Modal'
 
-export default function ListContact({img,name,designation,email, location, phone, showModal}) {
+export default function ListContact({img,name,designation,email, location, phone, showModal, delete_contact}) {
     return (
         <div className=" contact-card">
         <div className="row">
@@ -25,7 +25,7 @@ export default function ListContact({img,name,designation,email, location, phone
             <div className="col-lg-2">
                 <div className="row">
                    
-                    <div className="col-lg-12 fun-icon"><p><i onClick={showModal} data-bs-toggle="modal" data-bs-target="#MexampleModal"  className="fas fa-pencil-alt pen trash" /><i className="fas fa-user-minus  trash" /></p></div>
+                    <div className="col-lg-12 fun-icon"><p><i onClick={showModal} data-bs-toggle="modal" data-bs-target="#MexampleModal"  className="fas fa-pencil-alt pen trash" /><i onClick={delete_contact} className="fas fa-user-minus  trash" /></p></div>
                 </div>
             </div>
         </div>

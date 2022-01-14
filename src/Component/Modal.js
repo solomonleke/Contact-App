@@ -48,6 +48,8 @@ export default function Modal() {
                                 image: "",
                                 phone: ""
                             })
+
+                            
                         }
                         
                     }
