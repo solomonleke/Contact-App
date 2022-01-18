@@ -6,10 +6,25 @@ import GridContact from './Component/GridContact';
 import GridPage from './Screens/GridPage';
 import { UserContext } from './Context/UserContext';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Note from './Screens/Note';
+import Data from './Data';
+import TodoList from './Screens/TodoList';
 
 
 function App() {
+
+  const [Payload, setPayload] = useState(localStorage.getItem('Payload')? JSON.parse(localStorage.getItem("Payload")): Data)
+
+    
+    const AddNote = () =>{
+
+      localStorage.setItem("Payload", JSON.stringify(Payload))
+  }
+
+  useEffect(() => {
+      AddNote()
+  }, [])
 
   const [ContactId, setContactId] = useState("")
   const [Watch, setWatch] = useState(false)
@@ -17,14 +32,15 @@ function App() {
   return (
     <div className="App">
 
-    <UserContext.Provider value = {{ContactId, setContactId, Watch, setWatch}}>
+    <UserContext.Provider value = {{ContactId, setContactId, Watch, setWatch, Payload, setPayload}}>
      <BrowserRouter>
     
 
    
    
         <Routes>
-          <Route path="/" element={<ContactPage/>}/>
+          <Route path="/note" element={<Note/>}/>
+          <Route path="/" element={<TodoList/>}/>
           <Route path="/gridCard" element={<GridPage/>}/>
         </Routes>
      </BrowserRouter>

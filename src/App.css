@@ -228,3 +228,14 @@ input[type="checkbox"]{
 .pen-grid{
     color: #5d6fbb;
 }
+
+.fav-selected{
+    fill: #ffbb44 !important;
+}
+.anc-link{
+    text-decoration: none;
+}
+.text{
+    text-transform: capitalize;
+    margin-top: 20px;
+}

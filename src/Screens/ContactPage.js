@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useContext } from 'react/cjs/react.development'
 import Button from '../Component/Button'
 import ListContact from '../Component/ListContact'
@@ -69,7 +70,7 @@ export default function ContactPage() {
         <div>
           <div className="container">
                 <div className="my-nav">
-                  <h1>Contacts <span>| Apps . contacts</span></h1>
+                  <h1>Contacts <span>| Apps . contacts</span><Link className="anc-link" to="/note"> <span> |Note </span></Link></h1>
                 </div>
 
                 <div className="row nav-row">
