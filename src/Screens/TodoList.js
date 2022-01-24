@@ -17,7 +17,22 @@ export default function TodoList() {
 
     })
 
+    const [SingleTodo, setSingleTodo] = useState({
+
+        title: "",
+        description: "",
+        completed: false,
+        tag: "",
+
+    })
+    // const newTodo = JSON.parse(localStorage.getItem('edit'))
+    // const [editedTodo, setEditedTodo] = useState(newTodo)
+
+
+
     const [Watch, setWatch] = useState(false)
+    const [WatchView, setWatchView] = useState(false)
+    const [Button, setButton] = useState("Submit")
     const [Change, setChange] = useState(false)
     
     const SaveTodo = () => {
@@ -32,21 +47,61 @@ export default function TodoList() {
         setTodo({...todo, [e.target.name]: e.target.value })
     }
 
+ 
+
     const addTodo = () => {
+
+        if(Button == "Update"){
+
+            let id = todo.id;
+
+            Payload.splice(id ,1,todo);
+            localStorage.setItem("PayloadTodo", JSON.stringify(Payload))
+            setTodo('')
+            setWatch(false)
+
+        }else{
+            const updatedTodo = todo
+            setPayload([...Payload, updatedTodo])
+    
+            const updatedPayload = [...Payload, updatedTodo]
+    
+            localStorage.setItem("PayloadTodo", JSON.stringify(updatedPayload))
+            setTodo({})
+            setWatch(false)
+
+        }
       
-        console.log(todo)
-        const updatedTodo = todo
-        setPayload([...Payload, updatedTodo])
-
-        const updatedPayload = [...Payload, updatedTodo]
-
-        localStorage.setItem("PayloadTodo", JSON.stringify(updatedPayload))
-        setTodo({})
-        setWatch(false)
+        
 
 
 
     }
+
+    const TaskEdit = (id) => {
+   
+        setButton("Update")
+        let item = {...Payload[id], 'id':id, 'completed':false}
+        setTodo(item)
+       
+         
+        setWatch(true)
+ 
+     }
+
+     const ViewTodo = (id) => {
+        setWatchView(true)
+        let item = {...Payload[id]}
+        setTodo(item)
+        setWatch("si")
+       
+     }
+     
+    const discard = ()=>{
+        setWatchView(false)
+        setWatch(false)
+    }
+
 
     const handleForm = () => {
         setWatch(true)
@@ -81,8 +136,12 @@ export default function TodoList() {
         alert("job completed")
     }
 
-    useEffect(() => {
 
+
+
+
+    useEffect(() => {
+        
       SaveTodo()
     }, [Change])
 
@@ -102,7 +161,7 @@ export default function TodoList() {
                 <th>Title</th>
                 <th>Description</th>
                 <th>Completed</th>
-                <th>Tags</th>
+                <th>Action</th>
                 <th>Action</th>
 
                 </thead>
@@ -126,10 +185,10 @@ export default function TodoList() {
                                 <td>{item.title}</td>
                                 <td>{item.description}</td>
                                 <td>{item.completed ? "Completed": "Not Completed"}</td>
-                                <td>{item.tag}</td>
                                 <td>{item.completed ? (<button className="btn btn-primary" onClick={()=>TaskCompleted(index)}>Good Job</button>): (
                                     <button className="btn btn-secondary" onClick={()=>TaskDone(index)}>Done</button>
                                 ) }</td>
+                                <td><button className="btn btn-primary" onClick={()=>TaskEdit(index)}>Edit</button> <button className="btn btn-secondary" onClick={()=>ViewTodo(index)}>View</button></td>
                                 </tr>
                             ))
                         ) : (
@@ -159,6 +218,37 @@ export default function TodoList() {
                    
                 </tbody>
             </table>
+                <br/>
+
+                {
+                    WatchView === true ? (
+                        <table className="table">
+                <thead>
+                   
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Completed</th>
+                    <th>Tags</th>
+                    <th>Action</th>
+                
+                </thead>
+
+
+                <tbody>
+                 
+                  <td>{todo.title}</td>
+                  <td>{todo.description}</td>
+                  <td>{todo.completed? "Completed": "Not Completed"}</td>
+                  <td>{todo.title}</td>
+                  <td><button onClick={discard} className="btn-discard btn">Discard</button></td>
+                 
+                </tbody>
+
+
+            </table>
+                    ): ("")
+                }
+            
         
         
          
@@ -178,7 +268,7 @@ export default function TodoList() {
                     </div>
                    
                     <button  onClick={handleFormClose} className="btn btn-danger mx-3">Discard</button>
-                    <button  onClick={addTodo} className="btn btn-primary ">Submit</button>
+                    <button  onClick={addTodo} className="btn btn-primary ">{Button}</button>
                
                   
                     </div>
@@ -188,6 +278,8 @@ export default function TodoList() {
                 )
                
                }
+
+              
         </div>
     )
 }
