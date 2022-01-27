@@ -10,8 +10,11 @@ import { useEffect, useState } from 'react';
 import Note from './Screens/Note';
 import Data from './Data';
 import TodoList from './Screens/TodoList';
-import InvoiceList from './Screens/InvoiceList';
 import Newtodo from './Screens/NewTodo';
+import InvoiceEdit from './project4/InvoiceEdit';
+import InvoiceAdd from './project4/InvoiceAdd';
+import InvoicePreview from './project4/InvoicePreview';
+import InvoiceList from './project4/List';
 
 
 function App() {
@@ -43,8 +46,10 @@ function App() {
         <Routes>
           <Route path="/note" element={<Note/>}/>
           <Route path="/todo" element={<TodoList/>}/>
-          <Route path="/" element={<Newtodo/>}/>
-          <Route path="/ss" element={<InvoiceList/>}/>
+          <Route path = "/" element = {<InvoiceList/>}/>
+          <Route path = "invoiceedit" element = {<InvoiceEdit/>}/>
+          <Route path = "invoiceadd" element = {<InvoiceAdd/>}/>
+          <Route path = "invoicepreview" element = {<InvoicePreview/>}/>
           <Route path="/gridCard" element={<GridPage/>}/>
         </Routes>
      </BrowserRouter>
