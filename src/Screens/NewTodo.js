@@ -109,7 +109,7 @@ const Newtodo = () => {
         <div className="my-nav">
         <h1>Crude Apps
              <Link className="anc-link" to="/contact"> <span>| Apps . contacts</span></Link>
-             <Link className="anc-link" to="/note"> <span> | Note </span></Link>
+             <Link className="anc-link" to="/myNote"> <span> | Note </span></Link>
              <Link className="anc-link" to="/todo"> <span> | TodoApp </span></Link>
         </h1>
       </div>
