@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import TodoData from '../TodoData'
 
 const Newtodo = () => {
@@ -105,6 +106,8 @@ const Newtodo = () => {
     console.log(TodoData)
     return (
         <div className="container mt-5">
+
+        <button><Link to="/todo">todo</Link></button>
             <button onClick={AddTodo} className="btn btn-primary offset-lg-10">Add Todo</button>
 
 
