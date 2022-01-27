@@ -45,6 +45,7 @@ function App() {
    
         <Routes>
           <Route path="/note" element={<Note/>}/>
+          <Route path="/contact" element={<ContactPage/>}/>
           <Route path="/" element={<Newtodo/>}/>
           <Route path="/todo" element={<TodoList/>}/>
           <Route path = "/list" element = {<InvoiceList/>}/>

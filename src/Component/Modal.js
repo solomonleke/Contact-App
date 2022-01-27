@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function Modal() {
 
@@ -16,6 +16,8 @@ export default function Modal() {
         setContacts({...Contacts, [e.target.name]: e.target.value})
 
     }
+
+    const [Watch, setWatch] = useState(false);
 
     const AddContact = () =>{
 
@@ -48,9 +50,11 @@ export default function Modal() {
                                 image: "",
                                 phone: ""
                             })
-
+                            setWatch(!Watch)
                             
                         }
+
+                       
                         
                     }
                  )
@@ -65,6 +69,10 @@ export default function Modal() {
        
     
     }
+
+    useEffect(() => {
+      
+    }, [Watch]);
 
 
     return (

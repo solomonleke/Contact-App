@@ -87,7 +87,7 @@ export default function ContactPage() {
                     <Button
                     btn_style= "contact-btn btn-2"
                     btn_icon= "fas fa-list icon2"
-                    link = "/"
+                    link = "/contact"
                     />
                     <Button
                     btn_style= "contact-btn"

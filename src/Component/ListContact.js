@@ -29,7 +29,9 @@ export default function ListContact({img,name,designation,email, location, phone
                 </div>
             </div>
         </div>
-       
+        <div id='myModal'>
+            <Modal/>
+        </div>
         <div id='EditModal'>
             <EditModal/>
         </div>

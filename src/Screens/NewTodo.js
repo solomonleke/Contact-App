@@ -106,8 +106,14 @@ const Newtodo = () => {
     console.log(TodoData)
     return (
         <div className="container mt-5">
-
-        <button><Link to="/todo">todo</Link></button>
+        <div className="my-nav">
+        <h1>Crude Apps
+             <Link className="anc-link" to="/contact"> <span>| Apps . contacts</span></Link>
+             <Link className="anc-link" to="/note"> <span> | Note </span></Link>
+             <Link className="anc-link" to="/todo"> <span> | TodoApp </span></Link>
+        </h1>
+      </div>
+      
             <button onClick={AddTodo} className="btn btn-primary offset-lg-10">Add Todo</button>
 
 
