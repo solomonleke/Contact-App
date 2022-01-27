@@ -1,9 +1,22 @@
 import React, { useEffect, useState } from "react";
 
+
+
+
+
+
 export default function InvoiceList() {
+
+
   const [data, setData] = useState([]);
+ 
+
+
+
 
   useEffect(() => {
+
+  
     const getData = () => {
       let localItems = JSON.parse(window.localStorage.getItem("invoices"));
       setData(localItems);
@@ -296,7 +309,7 @@ export default function InvoiceList() {
                         </tr>
                       </thead>
                       <tbody>
-                        {data.map((e, i) => {
+                        {data?.map((e, i) => {
                           let total = e.items.reduce((a,b)=>parseInt(a) + parseInt(b.itemAmount), 0)-parseInt(e.discount)
                           return (
                             <tr role="row" key={i}>
