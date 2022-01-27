@@ -44,7 +44,8 @@ function App() {
    
    
         <Routes>
-          <Route path="/" element={<Note/>}/>
+          <Route path="/note" element={<Note/>}/>
+          <Route path="/" element={<Newtodo/>}/>
           <Route path="/todo" element={<TodoList/>}/>
           <Route path = "/list" element = {<InvoiceList/>}/>
           <Route path = "invoiceedit" element = {<InvoiceEdit/>}/>

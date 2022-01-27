@@ -71,13 +71,17 @@ const Newtodo = () => {
     const AddTodo = () =>{
         setWatch(true)
     }
-    const TaskCompleted = (id) =>{
+    const TaskCompleted = (solo) =>{
         Payload.map((e,i)=>{
-            if(id === i){
-                e.completed = e.completed == false ? true : ""
+
+            if(solo === i){
+                e.completed = e.completed == false ? true : false
             }
         })
         setChange(!Change)
+        localStorage.setItem("soloTodo",JSON.stringify(Payload))   
+        
+        
         
     }
     const Discard = () =>{
@@ -126,8 +130,8 @@ const Newtodo = () => {
                         <td>{item.title}</td>
                         <td>{item.description}</td>
                         <td>{item.completed ? "Completed": "Not Completed"}</td>
-                        <td>{item.completed ? (<button className="btn btn-Primary">Good Job</button>):
-                        (<button className="btn btn-secondary" onClick={()=>TaskCompleted(index)}>Done</button>)} </td>
+                        <td>{item.completed ? (<button style={{padding: "8px 12px"}} onClick={()=>TaskCompleted(index)} className="btn btn-Primary">Good Job</button>):
+                        (<button style={{padding: "8px 29px"}} className="btn btn-secondary " onClick={()=>TaskCompleted(index)}>Done</button>)} </td>
                         <td><button className="btn btn-secondary" onClick={()=>EditTodo(index)}>Edit</button> <button className="btn btn-secondary">View</button></td>
                     </tr>
                     ))
